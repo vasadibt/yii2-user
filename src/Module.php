@@ -20,6 +20,7 @@ use yii\base\Model;
 use yii\console\Application as ConsoleApplication;
 use yii\db\ActiveQuery;
 use yii\db\ActiveQueryInterface;
+use yii\db\Connection;
 use yii\di\Container;
 use yii\web\Application as WebApplication;
 
@@ -146,7 +147,7 @@ class Module extends \yii\base\Module implements BootstrapInterface
      */
     public function bootstrap($app)
     {
-        $this->register(Yii::$container);
+        $this->register($app, Yii::$container);
 
         if ($app instanceof WebApplication) {
 
@@ -161,16 +162,23 @@ class Module extends \yii\base\Module implements BootstrapInterface
     }
 
     /**
+     * @param \yii\base\Application $app
      * @param Container $container
      */
-    protected function register($container)
+    protected function register($app, $container)
     {
-        $container->set(get_class($this), $this);
+        $definitions = array_merge(
+            [
+                get_class($app->db) => $app->db,
+                get_class($this) => $this,
+            ],
+            $this->definitions
+        );
 
         if (is_callable($this->register)) {
-            call_user_func($this->register, $container, $this->definitions, $this);
+            call_user_func($this->register, $container, $definitions, $this);
         } else {
-            $container->setDefinitions($this->definitions);
+            $container->setDefinitions($definitions);
         }
     }
 

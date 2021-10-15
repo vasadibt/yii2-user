@@ -25,10 +25,15 @@ class UserFinder extends BaseObject implements UserFinderInterface
     public static function find()
     {
         /** @var UserFinderInterface $finder */
-        $finder = Yii::$container->get(static::class);
+        $finder = Yii::createObject(static::class);
         return $finder;
     }
 
+    /**
+     * @param Connection $db
+     * @param Module $module
+     * @param array $config
+     */
     public function __construct(Connection $db, Module $module, $config = [])
     {
         $this->db = $db;

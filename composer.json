@@ -2,13 +2,7 @@
   "name": "vasadibt/yii2-user",
   "description": "Complete user module with login and lock page",
   "type": "yii2-extension",
-  "keywords": [
-    "yii2",
-    "extension",
-    "module",
-    "user",
-    "dashboard"
-  ],
+  "keywords": ["yii2", "extension", "module", "user", "dashboard"],
   "homepage": "https://github.com/vasadibt/yii2-user",
   "license": "MIT",
   "authors": [
