@@ -27,7 +27,7 @@ class ResetPassword extends BaseModel implements ResetPasswordFormInterface
     /**
      * @var array|mixed|ActiveRecordInterface|null
      */
-    public $_user;
+    public $_user = false;
 
     /**
      * {@inheritDoc}
@@ -101,6 +101,12 @@ class ResetPassword extends BaseModel implements ResetPasswordFormInterface
 
         $this->user->setPassword($this->newPassword);
         $this->user->setPasswordResetToken(null);
-        return $this->user->save(false);
+        $this->user->save(false);
+
+        if ($this->module->resetPasswordAutoLogin){
+            Yii::$app->user->login($this->user, $this->module->rememberDuration);
+        }
+
+        return true;
     }
 }

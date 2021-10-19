@@ -20,7 +20,7 @@ class PasswordResetRequest extends BaseModel implements PasswordResetRequestForm
     /**
      * @var ExtendedIdentityInterface
      */
-    public $_user;
+    public $_user = false;
 
     /**
      * {@inheritdoc}
@@ -55,27 +55,21 @@ class PasswordResetRequest extends BaseModel implements PasswordResetRequestForm
             return false;
         }
 
-        if ($this->user instanceof ExtendedIdentityInterface) {
-            $this->sendResetTokenEmail($this->user, $this->getPasswordResetToken($this->user));
+        if (!($this->user instanceof ExtendedIdentityInterface)) {
+            return false;
         }
 
-        return true;
+        $this->refreshPasswordResetToken($this->user);
+
+        return $this->sendResetTokenEmail();
     }
 
-    /**
-     * @param ExtendedIdentityInterface $user
-     * @return string
-     */
-    public function getPasswordResetToken(ExtendedIdentityInterface $user)
+    public function refreshPasswordResetToken(ExtendedIdentityInterface $user)
     {
-        if ($user->isPasswordResetTokenValid($passwordResetToken = $user->getPasswordResetToken())) {
-            return $passwordResetToken;
+        if (!$user->isPasswordResetTokenValid($user->getPasswordResetToken())) {
+            $user->generatePasswordResetToken();
+            $user->save();
         }
-
-        $user->setPasswordResetToken($passwordResetToken = $user->generatePasswordResetToken());
-        $user->save();
-
-        return $passwordResetToken;
     }
 
     /**
@@ -97,21 +91,14 @@ class PasswordResetRequest extends BaseModel implements PasswordResetRequestForm
     }
 
     /**
-     * @param ExtendedIdentityInterface $user
-     * @param $passwordResetToken
      * @return bool
      */
-    protected function sendResetTokenEmail(ExtendedIdentityInterface $user, $passwordResetToken)
+    protected function sendResetTokenEmail()
     {
-        $message = Yii::$app->mailer->compose($this->module->resetPasswordEmailTemplates, compact('user', 'passwordResetToken'));
-
-        if ($this->module->resetPasswordEmailFrom) {
-            $message->setFrom($this->module->resetPasswordEmailFrom);
-        }
-
+        $user = $this->user;
+        $message = Yii::$app->mailer->compose($this->module->resetPasswordEmailTemplates, compact('user'));
         $message->setTo($user->getEmail());
-        $message->setSubject(sprintf($this->module->resetPasswordEmailSubject, ['{appName}' => Yii::$app->name]));
-
+        $message->setSubject($this->module->resetPasswordEmailSubject);
         return $message->send();
     }
 }

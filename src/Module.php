@@ -83,13 +83,13 @@ class Module extends \yii\base\Module implements BootstrapInterface
         'text' => 'passwordResetToken-text',
     ];
     /**
-     * @var string[] email => name
-     */
-    public $resetPasswordEmailFrom = [];
-    /**
      * @var string
      */
     public $resetPasswordEmailSubject;
+    /**
+     * @var bool
+     */
+    public $resetPasswordAutoLogin = false;
     /**
      * @var int
      */
@@ -110,9 +110,17 @@ class Module extends \yii\base\Module implements BootstrapInterface
      * @var string
      */
     public $authLayout = 'main';
-
+    /**
+     * @var bool
+     */
     public $loginFailDetect = true;
+    /**
+     * @var string
+     */
     public $loginFailType = self::IP_AND_EMAIL;
+    /**
+     * @var int
+     */
     public $loginFailMax = 3;
 
     /**

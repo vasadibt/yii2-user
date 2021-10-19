@@ -17,18 +17,18 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'E-mail address' => 'E-mail address',
-    'New password' => 'New password',
-    'Password' => 'Password',
-    'Repeat new password' => 'Repeat new password',
     'Back to login' => 'Back to login',
     'Change account' => 'Change account',
+    'E-mail address' => 'E-mail address',
     'If you forgot your password you can' => 'If you forgot your password you can',
     'Incorrect login informations.' => 'Incorrect login informations.',
     'Login' => 'Login',
+    'New password' => 'New password',
+    'Password' => 'Password',
     'Please choose your new password:' => 'Please choose your new password:',
     'Please fill out the following fields to login:' => 'Please fill out the following fields to login:',
     'Please fill out your email. A link to reset password will be sent there.' => 'Please fill out your email. A link to reset password will be sent there.',
+    'Repeat new password' => 'Repeat new password',
     'Request password reset' => 'Request password reset',
     'Reset password' => 'Reset password',
     'Save' => 'Save',
@@ -36,4 +36,7 @@ return [
     'Too many incorrect login attempts.' => 'Too many incorrect login attempts.',
     'reset it' => 'reset it',
     '{appName} :: Password reset' => '{appName} :: Password reset',
+    'Check your email for further instructions.' => 'Check your email for further instructions.',
+    'Forgot your password?' => 'Forgot your password?',
+    'You have successfully set the new password.' => 'You have successfully set the new password.',
 ];

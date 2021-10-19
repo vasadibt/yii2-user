@@ -17,18 +17,18 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'E-mail address' => 'E-mail cím',
-    'New password' => 'Új jelszó',
-    'Password' => 'Jelszó',
-    'Repeat new password' => 'Új jelszó megerősítése',
     'Back to login' => 'Vissza a belépésre',
     'Change account' => 'Fiók váltása',
+    'E-mail address' => 'E-mail cím',
     'If you forgot your password you can' => 'Ha elfelejtette jelszavát,',
     'Incorrect login informations.' => 'Helytelen bejelentkezési adatok.',
     'Login' => 'Belépés',
+    'New password' => 'Új jelszó',
+    'Password' => 'Jelszó',
     'Please choose your new password:' => 'Kérjük, válassza ki új jelszavát:',
     'Please fill out the following fields to login:' => 'A bejelentkezéshez kérjük, töltse ki az alábbi mezőket:',
     'Please fill out your email. A link to reset password will be sent there.' => 'Kérjük, töltse ki az e -mail címét. A rendszer elküldi a linket a jelszó visszaállításához.',
+    'Repeat new password' => 'Új jelszó megerősítése',
     'Request password reset' => 'Jelszó visszaállítása',
     'Reset password' => 'Jelszó visszaállítása',
     'Save' => 'Mentés',
@@ -36,4 +36,7 @@ return [
     'Too many incorrect login attempts.' => 'Túl sok helytelen bejelentkezési kísérlet.',
     'reset it' => 'visszaállíthatja',
     '{appName} :: Password reset' => '{appName} :: Jelszó visszaállítása',
+    'Check your email for further instructions.' => 'További útmutatásért nézze meg e -mailjét.',
+    'Forgot your password?' => 'Elfelejtette a jelszavát?',
+    'You have successfully set the new password.' => 'Sikeresen beállította az új jelszót.',
 ];
