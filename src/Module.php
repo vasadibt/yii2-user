@@ -88,6 +88,10 @@ class Module extends \yii\base\Module implements BootstrapInterface
      */
     public $resetPasswordEmailSubject;
     /**
+     * @var callable
+     */
+    public $generateResetLink;
+    /**
      * @var bool
      */
     public $resetPasswordAutoLogin = false;

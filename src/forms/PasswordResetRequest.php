@@ -96,9 +96,26 @@ class PasswordResetRequest extends BaseModel implements PasswordResetRequestForm
     protected function sendResetTokenEmail()
     {
         $user = $this->user;
-        $message = Yii::$app->mailer->compose($this->module->resetPasswordEmailTemplates, compact('user'));
+        $resetLink = $this->generateResetLink($user);
+        $message = Yii::$app->mailer->compose($this->module->resetPasswordEmailTemplates, compact('user', 'resetLink'));
         $message->setTo($user->getEmail());
         $message->setSubject($this->module->resetPasswordEmailSubject);
         return $message->send();
+    }
+
+    /**
+     * @param ExtendedIdentityInterface $user
+     * @return false|mixed|string
+     */
+    public function generateResetLink(ExtendedIdentityInterface $user)
+    {
+        if ($this->module->generateResetLink) {
+            return call_user_func($this->module->generateResetLink, $user, $this);
+        }
+
+        return Yii::$app->urlManager->createAbsoluteUrl([
+            $this->module->id . '/forgot-password/reset-password',
+            'token' => $user->getPasswordResetToken(),
+        ]);
     }
 }
