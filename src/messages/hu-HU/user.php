@@ -19,6 +19,7 @@
 return [
     'Back to login' => 'Vissza a belépésre',
     'Change account' => 'Fiók váltása',
+    'Check your email for further instructions.' => 'A további lépésekért ellenőrizze a bejövő e-mail-jeit.',
     'E-mail address' => 'E-mail cím',
     'If you forgot your password you can' => 'Ha elfelejtette jelszavát,',
     'Incorrect login informations.' => 'Helytelen bejelentkezési adatok.',
@@ -34,9 +35,7 @@ return [
     'Save' => 'Mentés',
     'Send' => 'Küldés',
     'Too many incorrect login attempts.' => 'Túl sok helytelen bejelentkezési kísérlet.',
+    'You have successfully set the new password.' => 'Sikeresen beállította az új jelszót.',
     'reset it' => 'visszaállíthatja',
     '{appName} :: Password reset' => '{appName} :: Jelszó visszaállítása',
-    'Check your email for further instructions.' => 'További útmutatásért nézze meg e -mailjét.',
-    'Forgot your password?' => 'Elfelejtette a jelszavát?',
-    'You have successfully set the new password.' => 'Sikeresen beállította az új jelszót.',
 ];

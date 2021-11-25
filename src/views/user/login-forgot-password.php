@@ -39,7 +39,7 @@ $this->registerJs($js);
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
             <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
             <?= $form->field($model, 'password')->passwordInput() ?>
-            <?= Html::button(Yii::t('materialdashboard', 'Forgot your password?'), [
+            <?= Html::button(Yii::t('user', 'Forgot your password?'), [
                 'class' => 'btn btn-info forgot-pass-btn',
                 'tabindex' => '-1',
             ]) ?>
@@ -49,7 +49,7 @@ $this->registerJs($js);
 
             <?php $form = ActiveForm::begin(['id' => 'forgot-password-form', 'options' => ['style' => 'display: none;']]); ?>
             <?= $form->field($model, 'email')->textInput() ?>
-            <?= Html::button(Yii::t('materialdashboard', 'Back to login'), ['class' => 'btn btn-warning back-to-login']) ?>
+            <?= Html::button(Yii::t('user', 'Back to login'), ['class' => 'btn btn-warning back-to-login']) ?>
             <?= Html::submitButton(Yii::t('user', 'Send'), ['class' => 'btn btn-primary float-right']) ?>
             <?php ActiveForm::end(); ?>
         </div>

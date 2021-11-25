@@ -19,6 +19,7 @@
 return [
     'Back to login' => 'Back to login',
     'Change account' => 'Change account',
+    'Check your email for further instructions.' => 'Check your email for further instructions.',
     'E-mail address' => 'E-mail address',
     'If you forgot your password you can' => 'If you forgot your password you can',
     'Incorrect login informations.' => 'Incorrect login informations.',
@@ -34,9 +35,7 @@ return [
     'Save' => 'Save',
     'Send' => 'Send',
     'Too many incorrect login attempts.' => 'Too many incorrect login attempts.',
+    'You have successfully set the new password.' => 'You have successfully set the new password.',
     'reset it' => 'reset it',
     '{appName} :: Password reset' => '{appName} :: Password reset',
-    'Check your email for further instructions.' => 'Check your email for further instructions.',
-    'Forgot your password?' => 'Forgot your password?',
-    'You have successfully set the new password.' => 'You have successfully set the new password.',
 ];

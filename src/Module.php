@@ -22,6 +22,7 @@ use yii\db\ActiveQuery;
 use yii\db\ActiveQueryInterface;
 use yii\db\Connection;
 use yii\di\Container;
+use yii\helpers\ArrayHelper;
 use yii\web\Application as WebApplication;
 
 /**
@@ -129,18 +130,23 @@ class Module extends \yii\base\Module implements BootstrapInterface
     public function init()
     {
         if ($this->controllerNamespace === null) {
-            $subNamespace = Yii::$app instanceof ConsoleApplication ? 'commands' : 'controllers';
-            $this->controllerNamespace = __NAMESPACE__ . '\\' . $subNamespace;
+            $this->controllerNamespace = $this->getNamespace() . '\\' . (Yii::$app instanceof ConsoleApplication ? 'commands' : 'controllers');
         }
 
         parent::init();
 
-        if ($this->userClass === null) {
-            if (Yii::$app->get('user', false) !== null) {
-                $this->userClass = Yii::$app->user->identityClass;
-            } else {
-                throw new InvalidConfigException("The 'userClass' option is required.");
-            }
+        if ($this->userClass === null
+            && Yii::$app->get('user', false) !== null
+        ) {
+            $this->userClass = Yii::$app->user->identityClass;
+        }
+
+        if ($this->userClass === null){
+            throw new InvalidConfigException("The 'userClass' option is required.");
+        }
+
+        if (!((new $this->userClass) instanceof ExtendedIdentityInterface)){
+            throw new InvalidConfigException("The 'userClass' option must be implement ExtendedIdentityInterface.");
         }
 
         if ($this->resetPasswordEmailSubject === null) {
@@ -148,6 +154,23 @@ class Module extends \yii\base\Module implements BootstrapInterface
         } else {
             $this->resetPasswordEmailSubject = strtr($this->resetPasswordEmailSubject, ['{appName}' => Yii::$app->name]);
         }
+
+        if (!isset(Yii::$app->i18n->translations['user'])) {
+            Yii::$app->i18n->translations['user'] = [
+                'class' => 'yii\i18n\PhpMessageSource',
+                'basePath' => __DIR__ . '/messages',
+                'fileMap' => ['user' => 'user.php'],
+            ];
+        }
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getNamespace()
+    {
+        return implode('\\', array_slice(explode('\\', get_class($this)), 0, -1));
     }
 
     /**
