@@ -38,4 +38,5 @@ return [
     'You have successfully set the new password.' => 'Sikeresen beállította az új jelszót.',
     'reset it' => 'visszaállíthatja',
     '{appName} :: Password reset' => '{appName} :: Jelszó visszaállítása',
+    'Forgot your password?' => 'Elfejetette a jelszavát?',
 ];

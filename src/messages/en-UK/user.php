@@ -38,4 +38,5 @@ return [
     'You have successfully set the new password.' => 'You have successfully set the new password.',
     'reset it' => 'reset it',
     '{appName} :: Password reset' => '{appName} :: Password reset',
+    'Forgot your password?' => 'Forgot your password?',
 ];
