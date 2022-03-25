@@ -145,11 +145,11 @@ class Module extends \yii\base\Module implements BootstrapInterface
             $this->userClass = Yii::$app->user->identityClass;
         }
 
-        if ($this->userClass === null){
+        if ($this->userClass === null) {
             throw new InvalidConfigException("The 'userClass' option is required.");
         }
 
-        if (!((new $this->userClass) instanceof ExtendedIdentityInterface)){
+        if (!((new $this->userClass) instanceof ExtendedIdentityInterface)) {
             throw new InvalidConfigException("The 'userClass' option must be implement ExtendedIdentityInterface.");
         }
 
@@ -202,18 +202,23 @@ class Module extends \yii\base\Module implements BootstrapInterface
      */
     protected function register($app, $container)
     {
-        $definitions = array_merge(
-            [
-                get_class($app->db) => $app->db,
-                get_class($this) => $this,
-            ],
-            $this->definitions
-        );
+        if (!isset($this->definitions[Module::class])) {
+            $this->definitions[Module::class] = $this;
+        }
+
+        if (!isset($this->definitions[UserFinder::class])) {
+            $this->definitions[UserFinder::class] = function ($container, $params, $config) use ($app) {
+                if (empty($params)) {
+                    $params = [$app->db, $this];
+                }
+                return new UserFinder($params[0], $params[1], $config);
+            };
+        }
 
         if (is_callable($this->register)) {
-            call_user_func($this->register, $container, $definitions, $this);
+            call_user_func($this->register, $container, $this->definitions, $this);
         } else {
-            $container->setDefinitions($definitions);
+            $container->setDefinitions($this->definitions);
         }
     }
 
